@@ -34,10 +34,10 @@ const ExpenseForm = ({ addExpense, editIndex, expenses, updateExpense, cancelEdi
     e.preventDefault();
     try {
       if (editIndex !== null) {
-        await axios.patch(`http://localhost:5000/api/transactions/${expenses[editIndex]._id}`, expense);
+        await axios.patch(`https://wallet-wings.onrender.com/api/transactions/${expenses[editIndex]._id}`, expense);
         updateExpense(expense);
       } else {
-        const response = await axios.post('http://localhost:5000/api/transactions/', { userId: JSON.parse(localStorage.getItem('userData')).user._id, expense });
+        const response = await axios.post('https://wallet-wings.onrender.com/api/transactions/', { userId: JSON.parse(localStorage.getItem('userData')).user._id, expense });
         addExpense(response.data);
       }
       navigate('/');
