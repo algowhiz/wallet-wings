@@ -23,7 +23,7 @@ const Auth = () => {
         e.preventDefault();
         try {
             if (isLogin) {
-                const res = await axios.post('http://localhost:5000/api/auth/login', {
+                const res = await axios.post('https://wallet-wings.onrender.com/api/auth/login', {
                     email: formData.email,
                     password: formData.password
                 });
@@ -31,7 +31,7 @@ const Auth = () => {
                 alert('Login successful!'); // Display a success message
                 navigate('/');
             } else {
-                const res = await axios.post('http://localhost:5000/api/auth/signup', {
+                const res = await axios.post('https://wallet-wings.onrender.com/api/auth/signup', {
                     name: formData.name,
                     email: formData.email,
                     password: formData.password
