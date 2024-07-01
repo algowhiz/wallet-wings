@@ -94,5 +94,32 @@ const delTrasaction = async (req, res) => {
     }
 }
 
+const addTransactions = async (req, res) => {
+    try {
+      const transactions = req.body.transactions;
+      const userId = req.body.userId; 
+    
+      let user = await Transaction.findOne({ userId });
+    
+      if (!user) {
+        user = new Transaction({ userId, transactions: [] });
+      }
+  
+      transactions.forEach(transaction => {
+        user.transactions.push({
+          ...transaction,
+          userId: userId 
+        });
+      });
+  
+      await user.save();
+      
+      res.status(201).json(user.transactions);
+    } catch (error) {
+      console.error('Error adding transactions:', error);
+      res.status(500).json({ error: 'Failed to add transactions' });
+    }
+  }
 
-module.exports = { getAllTransaction, addTransaction, UpdateTransaction, delTrasaction };
+
+module.exports = { getAllTransaction, addTransaction, UpdateTransaction, delTrasaction , addTransactions };
