@@ -30,7 +30,7 @@ const Home = ({
   const fetchTransactions = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:5000/api/transactions/${id}`);
+      const response = await axios.get(`https://wallet-wings.onrender.com/api/transactions/${id}`);
       setExpenses(response.data);
     } catch (error) {
       console.error('Error fetching transactions:', error);
@@ -62,7 +62,7 @@ const Home = ({
         }
   
         const userId = JSON.parse(localStorage.getItem('userData')).user._id;
-        const response = await axios.post('http://localhost:5000/api/transactions/bulk', {
+        const response = await axios.post('https://wallet-wings.onrender.com/api/transactions/bulk', {
           userId: userId,
           transactions: transactions
         });
@@ -82,7 +82,7 @@ const Home = ({
     const transactionId = expenses[index]._id;
 
     try {
-      const response = await axios.delete(`http://localhost:5000/api/transactions/${transactionId}`);
+      const response = await axios.delete(`https://wallet-wings.onrender.com/api/transactions/${transactionId}`);
       const updatedExpenses = expenses.filter(expense => expense._id !== transactionId);
       setExpenses(updatedExpenses);
     } catch (error) {
