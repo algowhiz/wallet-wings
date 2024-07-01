@@ -104,7 +104,7 @@ const Home = ({
   const addExpense = async (expense) => {
     try {
       const userId = JSON.parse(localStorage.getItem('userData')).user._id;
-      const response = await axios.post('http://localhost:5000/api/transactions', { userId, expense });
+      const response = await axios.post('https://wallet-wings.onrender.com/api/transactions', { userId, expense });
       setExpenses(prevExpenses => [...prevExpenses, response.data]);
     } catch (error) {
       console.error('Error adding expense:', error);
