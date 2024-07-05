@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 
 const getAllTransaction = async (req, res) => {
     const { userId } = req.params;
+    const { skip = 0, limit = 10 } = req.query; 
 
     try {
         const userTransactions = await Transaction.findOne({ userId }).select('transactions');
@@ -13,12 +14,15 @@ const getAllTransaction = async (req, res) => {
             return res.status(404).json({ error: 'Transactions not found' });
         }
 
-        res.json(userTransactions.transactions);
+        // Apply pagination
+        const transactions = userTransactions.transactions.slice(Number(skip), Number(skip) + Number(limit));
+
+        res.json(transactions);
     } catch (error) {
         console.error('Error fetching transactions:', error);
         res.status(500).json({ error: 'Server error' });
     }
-}
+};
 
 const addTransaction = async (req, res) => {
     try {
